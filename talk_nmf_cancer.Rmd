@@ -1,0 +1,86 @@
+---
+author: "[Nima Hejazi](https://nimahejazi.org), Amanda Mok, Courtney Schiffman"
+title: "Learning Cancer Signatures with Non-Negative Matrix Factorization"
+institution: "University of California, Berkeley"
+date: "`r Sys.Date()`"
+bibliography: refs.bib
+output: binb::metropolis
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+# Introduction
+
+## Background
+
+* ...
+
+* ...
+
+* ...
+
+## More Background
+
+* ...
+
+* ...
+
+* ...
+
+# Non-Negative Matrix Factorization
+
+## Background
+
+* ...
+
+* ...
+
+* ...
+
+## Math
+
+* ...
+
+* ...
+
+* ...
+
+# Alexandrov et al., 2013
+
+## Motivation
+
+* ...
+
+* ...
+
+* ...
+
+## Methodology
+
+* ...
+
+* ...
+
+* ...
+
+## Findings
+
+* ...
+
+* ...
+
+* ...
+
+# We've talked enough 
+
+## Discussion
+
+* ...
+
+* ...
+
+* ...
+
+## References
