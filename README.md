@@ -17,11 +17,11 @@ the primary literature:
 
 1. "Deciphering signatures of mutational processes operative in human cancer."
    Alexandrov et al., 2013. Available
-   [here](https://www.sciencedirect.com/science/article/pii/S2211124712004330)
+   [here](https://www.sciencedirect.com/science/article/pii/S2211124712004330).
 
 2. "Learning the parts of objects by non-negative matrix factorization." D.D.
    Lee and H.S. Seung, 1999. Available
-   [here](https://www.cs.princeton.edu/courses/archive/spring12/cos424/pdf/lee-seung.pdf)
+   [here](https://www.cs.princeton.edu/courses/archive/spring12/cos424/pdf/lee-seung.pdf).
 
 ---
 
