@@ -1,4 +1,4 @@
-# CS294-150: NMF in Cancer
+# Talk: NMF-based detection of molecular signatures in cancer
 
 __Authors:__ Nima Hejazi, Amanda Mok, Courtney Schiffman
 
@@ -30,6 +30,6 @@ the primary literature:
 The slides are written in [R Markdown](https://rmarkdown.rstudio.com/) and
 compiled to [LaTeX beamer](https://github.com/josephwright/beamer)'s
 [metropolis theme](https://github.com/matze/mtheme) via the [`binb`
-R package](https://github.com/eddelbuettel/binb). Simple edit the file
+R package](https://github.com/eddelbuettel/binb). Simply edit the file
 `talk_nmf_cancer.Rmd` and then type `make`.
 
