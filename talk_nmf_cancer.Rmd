@@ -89,6 +89,10 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
+## DNA
+
+![](./figs/example.jpg)
+
 # @alexandrov2013deciphering (Amanda & Courtney)
 
 ## Motivation (Courtney)
