@@ -1,6 +1,6 @@
 ---
 author: "[Nima Hejazi](https://nimahejazi.org), Amanda Mok, Courtney Schiffman"
-title: "Learning Cancer Signatures with Non-Negative Matrix Factorization"
+title: "Discovering Cancer Signatures via Non-Negative Matrix Factorization"
 institution: "University of California, Berkeley"
 date: "`r Sys.Date()`"
 bibliography: refs.bib
@@ -11,17 +11,9 @@ output: binb::metropolis
 knitr::opts_chunk$set(cache=TRUE)
 ```
 
-# Introduction
+# Introduction (Nima)
 
-## Background
-
-* ...
-
-* ...
-
-* ...
-
-## More Background
+## Overview
 
 * ...
 
@@ -29,9 +21,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-# Non-Negative Matrix Factorization
-
-## Background
+## Overview
 
 * ...
 
@@ -39,7 +29,9 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## Math
+# Non-Negative Matrix Factorization (Nima)
+
+## Why NMF?
 
 * ...
 
@@ -47,9 +39,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-# Alexandrov et al., 2013
-
-## Motivation
+## What is NMF?
 
 * ...
 
@@ -57,7 +47,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## Methodology
+## Alternative factorizations?
 
 * ...
 
@@ -65,7 +55,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## Findings
+## NMF versus PCA
 
 * ...
 
@@ -73,7 +63,67 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-# We've talked enough 
+## Some fun with NMF
+
+* ...
+
+* ...
+
+* ...
+
+# A bit of biology (Amanda)
+
+## What's cancer?
+
+* ...
+
+* ...
+
+* ...
+
+## Molecular biology of cancer
+
+* ...
+
+* ...
+
+* ...
+
+# @alexandrov2013deciphering (Amanda & Courtney)
+
+## Motivation (Courtney)
+
+* ...
+
+* ...
+
+* ...
+
+## Use of NMF (Courtney)
+
+* ...
+
+* ...
+
+* ...
+
+## Simulations (Courtney)
+
+* ...
+
+* ...
+
+* ...
+
+## Findings (Amanda)
+
+* ...
+
+* ...
+
+* ...
+
+# We've talked enough (Amanda)
 
 ## Discussion
 
@@ -84,3 +134,4 @@ knitr::opts_chunk$set(cache=TRUE)
 * ...
 
 ## References
+
