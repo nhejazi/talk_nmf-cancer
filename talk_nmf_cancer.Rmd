@@ -93,31 +93,110 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ![](./figs/example.jpg)
 
-# @alexandrov2013deciphering (Amanda & Courtney)
+# Applying NMF to a biological challenge
 
-## Motivation (Courtney)
+## Alexandrov et al. characterize mutational processess as a blind source separation problem
 
-* ...
+Mutational catalogs "are the cumulative result of all the somatic mutational mechanisms ...that have been operative during the cellular lineage starting from the fertilized egg...to the cancer cell."
 
-* ...
+![](./figs/biol_challenge.jpg){height=45%}
 
-* ...
+## NMF is a natural method for handling the BSS problem
 
-## Use of NMF (Courtney)
 
-* ...
+![](./figs/biol_challenge.jpg){height=60%}
 
-* ...
+* Non-negative matrix entries.
 
-* ...
+* Want to learn the parts (mutational signatures of mutational processes) that add to the whole (mutational catalog).
 
-## Simulations (Courtney)
+## What are the basis vectors and encodings in the context of mutational processes?
 
-* ...
+![](./figs/Screen Shot 2018-09-30 at 7.30.25 PM.png)
+$$M \approx P\times E$$
 
-* ...
+$M$, $K$ mutation types by $G$ genomes
 
-* ...
+$P$, $K$ mutation types by $N$ mutation signatures
+
+$E$, $N$ mutation signatures by $G$ genomes
+
+
+## What are the basis vectors and encodings in the context of mutational processes?
+
+![](./figs/Screen Shot 2018-09-30 at 7.44.14 PM.png){width=80%}
+
+![](./figs/Screen Shot 2018-10-01 at 8.25.26 AM.png){width=30%}
+
+
+
+## The parts that make up the whole in mutational processes
+
+![](./figs/part_of_whole.jpg)
+
+## Method for deciphering signatures of mutational processes
+
+1. Input matrix $M$ of dimension $K$ (mutation types) by $G$ (genomes).
+
+2. Remove rare mutations (< 1%).
+
+3. Monte Carlo bootstrap resampling.
+
+
+## Method for deciphering signatures of mutational processes
+
+4. Apply the multiplicative update algorithm until convergence.
+* Repeat steps 3 and 4 $I$ times, each time storing $P$ and $E$.
+* Typical values $I=400-500$
+
+
+![](./figs/Screen Shot 2018-09-28 at 8.35.41 AM.png){width=35%}
+
+![](./figs/Screen Shot 2018-09-28 at 8.35.52 AM.png){width=30%}
+
+
+
+## Method for deciphering signatures of mutational processes
+
+5. Cluster the signatures (columns of $P$ matrix) from the $I$ iterations into $N$ clusters, one signature per cluster for each of the $I$ matrices.
+  * This automatically clusters the exposures.
+  * Use cosine similarity for clustering.
+
+![](./figs/clusters.jpeg){width=40%}
+
+
+## Method for deciphering signatures of mutational processes
+
+6. Create the iteration averaged centroid matrix, $\overline{\rm P}$, by averaging the signatures within each cluster.
+
+7. Evaluate the reproducibility of the signatures by calculating the average silhouette width over the $N$ clusters.
+
+![](./figs/silhouette.png){width=50%}
+
+
+## Method for deciphering signatures of mutational processes
+
+8. Evaluate the accuracy of the approximation of $M$ by calculating the Frobenius reconstruction errors.
+
+![](./figs/Screen Shot 2018-09-28 at 8.35.41 AM.png){width=40%}
+
+9. Repeat steps 1-8 for different values of $N=1,\dots,min(K,G)-1$.
+
+## Method for deciphering signatures of mutational processes
+
+10. Choose an $N$ corresponding to highly reproducible mutational signatures and low reconstruction error.
+
+![](./figs/Screen Shot 2018-09-30 at 8.55.52 PM.png){height=40%}
+
+
+## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
+
+![](./figs/simulations.jpg)
+
+## The method recovers 10 signatures in a simulated cancer genome dataset
+
+
+![](./figs/100genome.jpg)
 
 ## Findings (Amanda)
 
