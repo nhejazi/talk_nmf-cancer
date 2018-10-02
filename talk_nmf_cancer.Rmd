@@ -71,9 +71,8 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## Vector Quantization (VQ)
 
-* A form of matrix factorization in which the matrix factor $H$ is constrained
-  such that each column has a single entry equal to unity, with all other
-  entries being zero.
+* __Constraint:__ each column of $H$ has a single entry equal to unity, with all
+  other entries being set to zero.
 
 * Since this is a constraint on the _encoding_ columns, this results in each
   column of $W$ representing some distortion of the target image.
@@ -90,9 +89,20 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## Principal Components Analysis (PCA)
 
-* ...
+* __Constraint:__ columns of $W$ are set to be orthonormal; rows of $H$ are set
+  to be orthogonal to one another.
 
-* ...
+* Relaxation of the constraint of VQ in the sense that each face in our data set
+  may be represented by a linear combination of the basis images in $W$.
+
+* This results in a distributed encoding of each of the face images contained in
+  $V$; basis images are referred to as _eigenfaces_.
+
+* Statistical interpretation: each eigenface represents the direction of largest
+  variance within the sample data.
+
+* Intuitive interpretation: ??? (Complex cancellations make eigenfaces very
+  difficult to interpret.)
 
 ## PCA: _Eigenfaces_
 
@@ -104,32 +114,37 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## What is NMF?
 
-* ...
+* __Constraint:__ similar decomposition to PCA, but any nonzero entries in $W$
+  and $H$ must be _positive_.
 
-* ...
+* Multiple basis images may be used to reconstruct a face by linear combination;
+  however, there are no possible cancellations (unlike in PCA).
 
-* ...
-
-## Who cares about non-negativity?
-
-* ...
-
-* ...
-
-* ...
+* Since the basis images and encodings are all positive, each basis image may be
+  intuitively thought of as picking up a _part of a face_.
 
 ## What does non-negativity buy us?
 
-* ...
+* In practice, NMF produces sparse basis and encoding matrices.
+
+* The basis images are _non-global_ -- that is, picking up variation in parts
+  of a face.
+
+* The encoding are also spare, resulting in ...
 
 * ...
-
-* ...
-
 
 ## NMF: Parts of Faces
 
 ![](./figs/nmf_faces.png){height=90%}
+
+## Implementing NMF
+
+* ...
+
+* ...
+
+* ...
 
 ## Some fun with NMF
 
