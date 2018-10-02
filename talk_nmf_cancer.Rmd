@@ -13,7 +13,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 # Introduction (Nima)
 
-## Overview
+## Overview and Motivations
 
 * ...
 
@@ -21,23 +21,86 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## Overview
+## Overview of Matrix Factorization
 
-* ...
+* Matrix factorization as unsupervised learning
 
-* ...
+* What can we learn about objects by matrix factorization?
 
-* ...
+* A general formulation of matrix factorization
+
+* Various forms of matrix factorization: NMF, PCA, VQ
+
+* Applications of matrix factorization: images, text
+
+* Biological applications of matrix factorization
 
 # Non-Negative Matrix Factorization (Nima)
 
-## Why NMF?
+## What is Matrix Factorization?
+
+* Suppose we have a _data matrix_ $V$ of dimension $n \times m$, each column of
+  which is an $n$-vector of observations of a given variable.
+
+* A factorization of $V$ produces two matrices $\{W, H\}$ that approximately
+  capture the information present in $V$.
+
+* From linear algebra, we have $V_{ij} \approx (W H)_{ij} = \sum_{a = 1}^r
+  W_{ia} H_{aj}$.
+
+* The dimensionality of the induced matrix factors is reduced wrt $V$ -- that
+  is, let $W$ be $n \times r$ and $H$ be $r \times m$.
+
+* This can be viewed as a form of data compression when the rank $r$ is small in
+  comparison to $n$ and $m$.
+  * In particular, $r$ is often chosen such that $(n + m)r \leq nm$.
+
+## What is Matrix Factorization?
+
+* With the general factorization $V_{ij} \approx \sum_{a = 1}^r W_{ia} H_{aj}$,
+  $W$ and $H$ each pick up different important aspects of $V$.
+
+* When $V$ is a $n \times m$ matrix of images of faces, where each row
+  corresponds to a pixel and each column an image:
+  * the $r$ columns of $W$ may be thought of as basis images,
+  * and each of the $j$ columns of $H$ is termed an encoding (coefficients to be
+    applied to basis images).
+
+* Various forms of matrix factorization place different types of constraints on
+  the manner in which $W$ and $H$ are generated.
+
+## Vector Quantization (VQ)
+
+* A form of matrix factorization in which the matrix factor $H$ is constrained
+  such that each column has a single entry equal to unity, with all other
+  entries being zero.
+
+* Since this is a constraint on the _encoding_ columns, this results in each
+  column of $W$ representing some distortion of the target image.
+
+* Equivalently, each column of $V$ is approximated by a single basis (column of
+  $W$).
+
+* In terms of image learning, this results in the VQ decomposition learning
+  _prototypical_ faces.
+
+## VQ: Prototypical Faces
+
+![](./figs/vq_faces.png){height=90%}
+
+## Principal Components Analysis (PCA)
 
 * ...
 
 * ...
 
-* ...
+## PCA: _Eigenfaces_
+
+![](./figs/pca_faces.png){height=90%}
+
+## PCA in Biology
+
+* Obligatory example: John Novembre's European populations
 
 ## What is NMF?
 
@@ -47,7 +110,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## Alternative factorizations?
+## Who cares about non-negativity?
 
 * ...
 
@@ -55,13 +118,18 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * ...
 
-## NMF versus PCA
+## What does non-negativity buy us?
 
 * ...
 
 * ...
 
 * ...
+
+
+## NMF: Parts of Faces
+
+![](./figs/nmf_faces.png){height=90%}
 
 ## Some fun with NMF
 
@@ -70,6 +138,25 @@ knitr::opts_chunk$set(cache=TRUE)
 * ...
 
 * ...
+
+## NMF in biology
+
+* example from Bioconductor?
+
+* pretty plot goes here
+
+## NMF in cancer biology
+
+* So, we've now established that NMF finds _parts_ of the input matrix through
+  the non-negativity constraint it imposes on the matrix factors.
+
+* This has important applications for exploring cancer biology; namely, applying
+  NMF could help us detect _parts of tumors_.
+
+* Interpretation is challenging: does this mean we're detecting subclonal
+  populations?
+
+* There's a whole lot more to come.
 
 # A bit of biology (Amanda)
 
@@ -94,15 +181,15 @@ knitr::opts_chunk$set(cache=TRUE)
 * Somatic mutations: acquired over time in somatic cells
 
     * Endogenous: DNA damage as a result of metabolic byproducts
-    
+
     * Exogenous: DNA damage as a result of mutagenic exposure
-    
+
 * Epigenetic modifications: no change to DNA sequence
 
     * DNA methylation
-    
+
     * Histone modification
-    
+
     * MicroRNA gene silencing
 
 ## Somatic mutations
@@ -116,31 +203,33 @@ knitr::opts_chunk$set(cache=TRUE)
 * Base substitutions
 
     * 6 types of substitutions (C>G, C>T, C>A, G>T, G>A, T>A)
-    
+
     * 4 types of 5' base nucleotide
-    
+
     * 4 types of 3' base nucleotide
-    
+
     * Transcriptional strand
 
 ## Clonal evolution in cancer
 
 # Applying NMF to a biological challenge
 
-## Alexandrov et al. characterize mutational processess as a blind source separation problem
+## @alexandrov2013deciphering characterize mutational processess as a blind source separation problem
 
-Mutational catalogs "are the cumulative result of all the somatic mutational mechanisms ...that have been operative during the cellular lineage starting from the fertilized egg...to the cancer cell."
+Mutational catalogs "are the cumulative result of all the somatic mutational
+mechanisms ...that have been operative during the cellular lineage starting from
+the fertilized egg...to the cancer cell."
 
 ![](./figs/biol_challenge.jpg){height=45%}
 
 ## NMF is a natural method for handling the BSS problem
 
-
 ![](./figs/biol_challenge.jpg){height=60%}
 
 * Non-negative matrix entries.
 
-* Want to learn the parts (mutational signatures of mutational processes) that add to the whole (mutational catalog).
+* Want to learn the parts (mutational signatures of mutational processes) that
+  add to the whole (mutational catalog).
 
 ## What are the basis vectors and encodings in the context of mutational processes?
 
