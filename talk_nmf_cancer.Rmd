@@ -73,25 +73,57 @@ knitr::opts_chunk$set(cache=TRUE)
 
 # A bit of biology (Amanda)
 
-## What's cancer?
+## What is cancer?
 
-* ...
+* Complex tissues with multiple cell types and interactions
 
-* ...
+* Characterized by unchecked somatic cell proliferation
 
-* ...
+* Normal cells acquire hallmark traits that enable them to become tumorigenic ^[@hanahan2011hallmarks]
 
-## Molecular biology of cancer
+## Hallmarks of Cancer
 
-* ...
+![Hallmarks of Cancer](./figs/cancer_hallmarks.jpg)
 
-* ...
+## Cancer is a genetic disease
 
-* ...
+* Germline mutations: inherited from parents
 
-## DNA
+    * Mutations in tumor suppressor genes or oncogenes can predispose someone to develop cancer
 
-![](./figs/example.jpg)
+* Somatic mutations: acquired over time in somatic cells
+
+    * Endogenous: DNA damage as a result of metabolic byproducts
+    
+    * Exogenous: DNA damage as a result of mutagenic exposure
+    
+* Epigenetic modifications: no change to DNA sequence
+
+    * DNA methylation
+    
+    * Histone modification
+    
+    * MicroRNA gene silencing
+
+## Somatic mutations
+
+* Rearrangements
+
+* Copy number changes
+
+* Indels
+
+* Base substitutions
+
+    * 6 types of substitutions (C>G, C>T, C>A, G>T, G>A, T>A)
+    
+    * 4 types of 5' base nucleotide
+    
+    * 4 types of 3' base nucleotide
+    
+    * Transcriptional strand
+
+## Clonal evolution in cancer
 
 # Applying NMF to a biological challenge
 
