@@ -208,7 +208,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * There's a whole lot more to come.
 
-# A bit of biology (Amanda)
+# A bit of biology
 
 ## What is cancer?
 
@@ -249,19 +249,19 @@ __DNA-damaging exposures__
 * Carcinogens in tobacco smoke
 
     * Polycyclic aromatic hydrocarbons (PAHs) form DNA adducts
-    
+
     * Nitrosamines induce DNA alkylation
-    
+
 * UV radiation
 
     * Direct: dimerization of neighboring pyrimidines
-    
+
     * Indirect: production of reactive oxygen species
-    
+
 * Chronic inflammation
 
     * Reactive oxygen and nitrogen species produced by innate immune system
-    
+
     * Detection of DNA damage can activate immune response
 
 ## What causes these mutations?
@@ -330,7 +330,7 @@ __DNA-damaging exposures__
 \begin{itemize}
 
   \item{6 types: C>G, C>T, C>A, G>T, G>A, T>A}
-  
+
   \item{Transversion}
   \begin{itemize}
     \item{purine (A/G) $\leftrightarrow$ pyrimidine (T/C)}
@@ -342,7 +342,7 @@ __DNA-damaging exposures__
     \item{more commonly observed}
     \item{less likely to result in amino acid substitution}
   \end{itemize}
-  
+
 \end{itemize}
 
 \end{column}
@@ -518,8 +518,8 @@ __Data__
 
 * Whole-genome sequencing, ~30X coverage
 
-* Mutation alphabet: 
-    
+* Mutation alphabet:
+
     * 96 base substitutions (6 types $\times$ 16 5'- $\times$ 16 3'-dinucleotides)
     * Kataegis
     * Double nucleotide substitutions
@@ -616,8 +616,9 @@ __Takeaways__
 * Can recover previously identified signatures
 
     * Reassuring, but slightly misleading
-    
-    * Previous paper (same authors) also used NMF, but with different model selection procedure
+
+    * Previous paper (same authors) also used NMF, but with different model
+      selection procedure
 
 * Incorporate different mutation types (i.e. kataegis)
 
@@ -637,7 +638,7 @@ __Data__
 
     * Base substitutions
     * Indels
-    
+
 ## Findings: @stephens2012breastcancer
 
 \begin{columns}
@@ -700,9 +701,9 @@ __Biological__
 * Experimental procedures to isolate signature from specific exposure
 
 * Bioinformatics approaches to annotate signatures
-    
+
 __Computational__
-    
+
 * Incorporate additional constraints to exposure matrix $E$
 
     * Strong sparsity constraint to describe mixture by minimum signals
@@ -711,7 +712,13 @@ __Computational__
 
 ## Discussion
 
+* Question 1:
 
+* Question 2:
 
-## References 
+## Discussion
+
+* What do you all think?
+
+## References
 
