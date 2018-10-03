@@ -1,6 +1,6 @@
 ---
 author: "[Nima Hejazi](https://nimahejazi.org), Amanda Mok, Courtney Schiffman"
-title: "Discovering Cancer Signatures via Non-Negative Matrix Factorization"
+title: "Discovering Mutational Signatures via Non-Negative Matrix Factorization"
 institution: "University of California, Berkeley"
 date: "`r Sys.Date()`"
 bibliography: refs.bib
@@ -245,7 +245,7 @@ Goal: learn the "evolutionary history and population frequency of the subclonal 
 
 ![](./figs/Screen Shot 2018-10-01 at 8.18.04 PM.png){height=40%}
 
-## How is the work of @alexandrov2013deciphering. related to inferring clonal evolution of tumors?
+## How is the work of @alexandrov2013deciphering related to inferring clonal evolution of tumors?
 
 Different clonal mutations will have different signatures.
 
@@ -265,6 +265,8 @@ Deciphering Signatures of mutational processes
 
 ## @alexandrov2013deciphering focus more on uncovering the cumulative mutational processes that make up a cancer genome, rather than the evolution of the tumor.
 
+Goal: unscramble the latent signals from a mixture of a set of these signals.
+
 ![](./figs/biol_challenge.jpg){height=50%}
 
 
@@ -282,17 +284,27 @@ Deciphering Signatures of mutational processes
 
 ## What are the basis vectors and encodings in the context of mutational processes?
 
+* A signature of a mutational process is defined as a probability mass function with a domain of preselected mutation types.
+
+* The exposure of a mutational process is the mutation intensity
+
 ![](./figs/Screen Shot 2018-09-30 at 7.30.25 PM.png)
-$$M \approx P\times E$$
-
-$M$, $K$ mutation types by $G$ genomes
-
-$P$, $K$ mutation types by $N$ mutation signatures
-
-$E$, $N$ mutation signatures by $G$ genomes
 
 
 ## What are the basis vectors and encodings in the context of mutational processes?
+
+![](./figs/Screen Shot 2018-09-30 at 7.30.25 PM.png)
+$$P\times E \approx M$$
+
+$M$: $K$ mutation types by $G$ genomes
+
+$P$: $K$ mutation types by $N$ mutation signatures
+
+$E$: $N$ mutation signatures by $G$ genomes
+
+
+## What are the basis vectors and encodings in the context of mutational processes?
+
 
 ![](./figs/Screen Shot 2018-09-30 at 7.44.14 PM.png){width=55%}![](./figs/Screen Shot 2018-10-01 at 8.25.26 AM.png){width=25%}
 
@@ -305,7 +317,9 @@ $E$, $N$ mutation signatures by $G$ genomes
 
 ## The parts that make up the whole in mutational processes.
 
-![](./figs/part_of_whole.jpg)
+A somatic mutation catalog can be thought of as "a linear superposition of the signatures and intensities of exposure of mutational processes."
+
+![](./figs/Screen Shot 2018-10-02 at 10.03.52 PM.png){width=70%}
 
 ## Method for deciphering signatures of mutational processes
 
@@ -363,14 +377,60 @@ $E$, $N$ mutation signatures by $G$ genomes
 ![](./figs/Screen Shot 2018-09-30 at 8.55.52 PM.png){height=40%}
 
 
+## The method recovers 10 signatures in a simulated cancer genome dataset
+
+![](./figs/100genome.jpg)
+
+## The method recovers 10 signatures in a simulated cancer genome dataset
+
+* 100 simulated cancer genome mutational catalogs
+* 10 mutational processes with distinct signatures over 96 mutation types
+* Add Poisson noise
+
+![](./figs/Screen Shot 2018-10-03 at 8.35.54 AM.png)
+
+## The method recovers 10 signatures in a simulated cancer genome dataset
+
+Deciphered and simulated contributions of the mutational signatures are similar.
+
+![](./figs/Screen Shot 2018-10-03 at 8.36.08 AM.png)
+
+## The method recovers 10 signatures in a simulated cancer genome dataset
+
+Deciphered and simulated mutation signatures and catalogs are similar.
+
+![](./figs/Screen Shot 2018-10-03 at 8.36.22 AM.png)
+
+
 ## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
 
 ![](./figs/simulations.jpg)
 
-## The method recovers 10 signatures in a simulated cancer genome dataset
+## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
+
+The similarity of mutational signatures affects the method performance.
+
+![](./figs/Screen Shot 2018-10-03 at 8.36.51 AM.png)
+
+## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
+
+More mutational signatures require more genomes.
+
+![](./figs/Screen Shot 2018-10-03 at 8.37.04 AM.png)
 
 
-![](./figs/100genome.jpg)
+## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
+
+The method performs better when there are more mutations in the cancer genomes.
+
+![](./figs/Screen Shot 2018-10-03 at 8.37.26 AM.png)
+
+## The method is affected by the number of genomes, uniqueness of signatures, and number of mutations
+
+Accurately deciphered mutational signatures correspond to accurate exposure estimates.
+
+![](./figs/Screen Shot 2018-10-03 at 8.37.37 AM.png)
+
 
 ## Findings (Amanda)
 
