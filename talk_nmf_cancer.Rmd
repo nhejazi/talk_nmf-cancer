@@ -277,7 +277,9 @@ __DNA-damaging exposures__
 
 * Base substitutions
 
-* Insertion/deletions
+* Kataegis: 6+ consecutive mutations with average inter-mutation distances $\leq$ 1 kb
+
+* Insertion/deletions (indels)
 
 * Rearrangements
 
@@ -296,12 +298,12 @@ __DNA-damaging exposures__
   
   \item{Transversion}
   \begin{itemize}
-    \item{purine (A/G) <-> pyrimidine (T/C)}
+    \item{purine (A/G) $\leftrightarrow$ pyrimidine (T/C)}
   \end{itemize}
 
   \item{Transition}
   \begin{itemize}
-    \item{maintain ring structure (A <-> G or T <-> C)}
+    \item{maintain ring structure (A $\leftrightarrow$ G or T $\leftrightarrow$ C)}
     \item{more commonly observed}
     \item{less likely to result in amino acid substitution}
   \end{itemize}
@@ -473,23 +475,208 @@ $E$, $N$ mutation signatures by $G$ genomes
 
 ![](./figs/100genome.jpg)
 
-## Findings (Amanda)
+## Findings: @nikzainal2012breastcancer
 
-* ...
+__Data__
 
-* ...
+* 21 primary breast cancer samples
 
-* ...
+* Whole-genome sequencing, ~30X coverage
 
-# We've talked enough (Amanda)
+* Mutation alphabet: 
+    
+    * 96 base substitutions (6 types $\times$ 16 5'- $\times$ 16 3'-dinucleotides)
+    * Kataegis
+    * Double nucleotide substitutions
+    * Indels at microhomologies
+    * Indels at mono/polynucleotide repeats
+
+* Previously described 5 mutational signatures
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.53\textwidth}
+\begin{itemize}
+\item{96 base mutations}
+\item{Extracted 4 reproducible signatures, similar to 4 previously identified signatures (A, B, D, E)}
+\item{Signature C similar to Signature D $\rightarrow$ incorporated into Signature 3}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure4a.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations + 4 subclasses}
+\item{Signatures 1-4 largely unmodified}
+\item{Now able to detect Signature 5}
+\item{"kataegis is mostly independent from other four mutational signatures"}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure4b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations $\times$  +/- transcribed strand}
+\item{Recovered previous 4 signatures}
+\item{Observed C>A strand bias in Signatures 1 and 3}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure5b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations $\times$ 256 neighboring 5'- and 3'- dinucleotides}
+\item{Identified 3 reproducible signatures}
+\item{Signature 2: strong bias for pyrimidine-T-C-N-N}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure6c.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+__Takeaways__
+
+* Can recover previously identified signatures
+
+    * Reassuring, but slightly misleading
+    
+    * Previous paper (same authors) also used NMF, but with different model selection procedure
+
+* Incorporate different mutation types (i.e. kataegis)
+
+* Can recover transcriptional strand bias
+
+* Can observe sequence context dependencies
+
+## Findings: @stephens2012breastcancer
+
+__Data__
+
+* 100 primary breast cancer samples
+
+* Exome-sequencing (21,416 protein-coding genes; 1,664 microRNAs)
+
+* Mutation alphabet:
+
+    * Base substitutions
+    * Indels
+    
+## Findings: @stephens2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{25-fold fewer mutations than whole-genome sequencing}
+\item{Identified 2 exome signatures, similar to Signatures 1 and 2}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure7a.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @stephens2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{Exome signature 2 shows context-specific strand bias}
+\item{Can also find in whole genome data $\rightarrow$ but only if restrict to exons}
+\item{Suggests strand bias might be exclusive to exons}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure7b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @stephens2012breastcancer
+
+__Takeaways__
+
+* More exome-sequencing data than whole genome
+
+* Fewer mutation numbers means fewer detectable signatures
+
+* Dividing genome into distinct functional regions can reveal interesting biology
+
+# Discussion
+
+## Summary
+
+"This study demonstrates that an approach based on the simplest (i.e. without additional constraints) NMF algorithm is sufficient to decipher signatures of mutational processes from catalogs of mutation from cancer genomes."
+
+## Future Directions
+
+__Biological__
+
+* Experimental procedures to isolate signature from specific exposure
+
+* Bioinformatics approaches to annotate signatures
+    
+__Computational__
+    
+* Incorporate additional constraints to exposure matrix $E$
+
+    * Strong sparsity constraint to describe mixture by minimum signals
+
+* Metrics to evaluate to select number of signatures $N$ to be deciphered
 
 ## Discussion
 
-* ...
 
-* ...
 
-* ...
-
-## References
+## References 
 
