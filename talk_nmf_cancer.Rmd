@@ -11,15 +11,21 @@ output: binb::metropolis
 knitr::opts_chunk$set(cache=TRUE)
 ```
 
-# Introduction (Nima)
+# Introduction
 
 ## Overview and Motivations
 
-* ...
+* Cancer biology is an extremely active area of research on all fronts, from
+  molecular biology and bioinformatics to translational medicine.
 
-* ...
+* Statistical learning methods have met with great success when applied to
+  complex and richly structured data, including images and text.
 
-* ...
+* Unsupervised clustering (e.g., matrix factorization) may help to learn about
+  or discover fundamental common properties of various cancers.
+
+* We review the key mathematical details of and explore the uses of matrix
+  factorization (in particular, NMF) in cancer biology.
 
 ## Overview of Matrix Factorization
 
@@ -31,16 +37,16 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * Various forms of matrix factorization: NMF, PCA, VQ
 
-* Applications of matrix factorization: images, text
+* Applications of matrix factorization: images
 
 * Biological applications of matrix factorization
 
-# Non-Negative Matrix Factorization (Nima)
+# Non-Negative Matrix Factorization
 
 ## What is Matrix Factorization?
 
 * Suppose we have a _data matrix_ $V$ of dimension $n \times m$, each column of
-  which is an $n$-vector of observations of a given variable.
+  which is an $n$-vector of observations.
 
 * A factorization of $V$ produces two matrices $\{W, H\}$ that approximately
   capture the information present in $V$.
@@ -54,11 +60,12 @@ knitr::opts_chunk$set(cache=TRUE)
 * This can be viewed as a form of data compression when the rank $r$ is small in
   comparison to $n$ and $m$.
   * In particular, $r$ is often chosen such that $(n + m)r \leq nm$.
+  * Since we control $r$, we control the degree of data compression.
 
 ## What is Matrix Factorization?
 
-* With the general factorization $V_{ij} \approx \sum_{a = 1}^r W_{ia} H_{aj}$,
-  $W$ and $H$ each pick up different important aspects of $V$.
+* With the factorization $V_{ij} \approx \sum_{a = 1}^r W_{ia} H_{aj}$, the
+  matrix factors $W$ and $H$ each pick up different important aspects of $V$.
 
 * When $V$ is a $n \times m$ matrix of images of faces, where each row
   corresponds to a pixel and each column an image:
@@ -75,28 +82,28 @@ knitr::opts_chunk$set(cache=TRUE)
   other entries being set to zero.
 
 * Since this is a constraint on the _encoding_ columns, this results in each
-  column of $W$ representing some distortion of the target image.
+  column of $W$ being a distortion of the target image.
 
 * Equivalently, each column of $V$ is approximated by a single basis (column of
   $W$).
 
-* In terms of image learning, this results in the VQ decomposition learning
-  _prototypical_ faces.
+* In terms of image processing/learning, VQ constraint is responsible for the
+  decomposition learning _prototypical_ faces.
 
 ## VQ: Prototypical Faces
 
-![](./figs/vq_faces.png){height=90%}
+![](./figs/vq_faces.png){height=100%}
 
 ## Principal Components Analysis (PCA)
 
 * __Constraint:__ columns of $W$ are set to be orthonormal; rows of $H$ are set
   to be orthogonal to one another.
 
-* Relaxation of the constraint of VQ in the sense that each face in our data set
-  may be represented by a linear combination of the basis images in $W$.
+* Relaxation of VQ constraint: each face in our data set may be represented by a
+  linear combination of basis images in $W$.
 
-* This results in a distributed encoding of each of the face images contained in
-  $V$; basis images are referred to as _eigenfaces_.
+* This results in a distributed encoding of each of the face images in $V$;
+  basis images have been termed _eigenfaces_.
 
 * Statistical interpretation: each eigenface represents the direction of largest
   variance within the sample data.
@@ -106,59 +113,87 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## PCA: _Eigenfaces_
 
-![](./figs/pca_faces.png){height=90%}
+![](./figs/pca_faces.png){height=100%}
 
-## PCA in Biology
+## PCA in Biology: Population Genetics in Europe
 
-* Obligatory example: John Novembre's European populations
+* Obligatory example: @novembre2008genes, "Genes mirror geography within
+  Europe", _Nature_.
+
+![](./figs/novembre_pca.png){height=70%}
 
 ## What is NMF?
 
-* __Constraint:__ similar decomposition to PCA, but any nonzero entries in $W$
-  and $H$ must be _positive_.
+* __Constraint:__ decomposition into matrix factors $W$ and $H$, wherein any
+  nonzero entries in $W$ and $H$ must be _positive_.
 
-* Multiple basis images may be used to reconstruct a face by linear combination;
-  however, there are no possible cancellations (unlike in PCA).
+* Since there are no cancellations (unlike in PCA), multiple basis images may be
+  used to reconstruct a face by additive linear combination.
 
-* Since the basis images and encodings are all positive, each basis image may be
-  intuitively thought of as picking up a _part of a face_.
+* Since basis images and encodings are all positive, each basis image may be
+  thought of as picking up a _part of a face_.
 
 ## What does non-negativity buy us?
 
 * In practice, NMF produces sparse basis and encoding matrices.
 
-* The basis images are _non-global_ -- that is, picking up variation in parts
-  of a face.
+* The basis images are _non-global_ -- that is, groups of basis images pick up
+  variation in a part of a face (e.g., eyes, mouth).
 
-* The encoding are also spare, resulting in ...
+* The encoding are also sparse, since not all basis images are used in
+  reconstituting any given face image.
 
-* ...
+* Thus, encodings are _sparsely distributed_, unlike the fully distributed
+  encodings of PCA and the unary encodings of VQ.
 
 ## NMF: Parts of Faces
 
 ![](./figs/nmf_faces.png){height=90%}
 
+## Overview of NMF
+
+* Generally, NMF may be viewed as a generative model (neural network) for how
+  the directly observable variables $V$ arise from hidden variables $H$.
+
+* Each hidden variable (in $H$) may be thought of as co-activating a subset of
+  the visible variables to reconstruct an example.
+
+* In particular, a large and varied group of hidden variables may be combined
+  additively to generate a whole example.
+
 ## Implementing NMF
 
-...
+* @lee1999learning combine a set of update rules with an objective function
+  $$F = \sum_{i = 1}^n \sum_{\mu = 1}^m V_{i \mu} \log(WH)_{i \mu} - (WH)_{i
+  \mu},$$
+  which converges to a local maximum with iterative updates under the given
+  rules.
 
-* ...
+* Update rules:
+  1. $W_{ia} \leftarrow W_{ia} \sum_{\mu} \frac{V_{i \mu}}{(WH)_{i \mu}} H_{a
+     \mu}$
+  2. $W_{ia} \leftarrow \frac{W_{ia}}{\sum_j W_{ja}}$
+  3. $H_{a \mu} \leftarrow H_{a \mu} \sum_i W_{ia} \frac{V_{i \mu}}{(WH)_{i
+     \mu}}$
 
-* ...
+* Exact form of objective function is not too important -- could also simply use
+  a squared error objective function.
 
-## Some fun with NMF
+## NMF as a neural network
 
-* ...
+![](./figs/nmf_neuralnet.png){height=90%}
 
-* ...
+## NMF as a neural network
 
-* ...
+* Visible variables $V$ generated by excitatory connections between hidden
+  variables $H$.
 
-## NMF in biology
+* To learn values of the hidden variables $H$, an additional set of inhibitory
+  feedback connections is required.
 
-* example from Bioconductor?
-
-* pretty plot goes here
+* The non-negativity constraints that define NMF capture intuitive biological
+  notions of how neurons work, suggesting that NMFs may present a simplified
+  model of how the brain learns parts of objects in perception.
 
 ## NMF in cancer biology
 
@@ -173,7 +208,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * There's a whole lot more to come.
 
-# A bit of biology (Amanda)
+# A bit of biology
 
 ## What is cancer?
 
@@ -183,7 +218,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * Normal cells acquire hallmark traits that enable them to become tumorigenic ^[@hanahan2011hallmarks]
 
-## Hallmarks of Cancer
+## What is cancer?
 
 ![Hallmarks of Cancer](./figs/cancer_hallmarks.jpg)
 
@@ -207,25 +242,128 @@ knitr::opts_chunk$set(cache=TRUE)
 
     * MicroRNA gene silencing
 
-## Somatic mutations
+## What causes these mutations?
+
+__DNA-damaging exposures__
+
+* Carcinogens in tobacco smoke
+
+    * Polycyclic aromatic hydrocarbons (PAHs) form DNA adducts
+
+    * Nitrosamines induce DNA alkylation
+
+* UV radiation
+
+    * Direct: dimerization of neighboring pyrimidines
+
+    * Indirect: production of reactive oxygen species
+
+* Chronic inflammation
+
+    * Reactive oxygen and nitrogen species produced by innate immune system
+
+    * Detection of DNA damage can activate immune response
+
+## What causes these mutations?
+
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\textbf{Error-prone DNA repair}
+\textit{Single-strand damage}
+\begin{itemize}
+  \item{Use complementary strand as template}
+  \item{Base excision repair: remove single base}
+  \item{Nucleotide excision repair: remove 12-24 bases}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/NER.jpg}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## What causes these mutations?
+
+\begin{columns}
+
+\begin{column}{0.53\textwidth}
+\textbf{Error-prone DNA repair}
+\textit{Double-strand damage}
+\begin{itemize}
+  \item{Non-homologous end joining: directly join microhomologies on single-strand tails}
+  \item{Homologous recombination: use sister chromatid or homologous chromosome as template}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{figure}
+\includegraphics{./figs/NHEJ_HR.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## What are these mutations?
+
+* Base substitutions
+
+* Kataegis: 6+ consecutive mutations with average inter-mutation distances $\leq$ 1 kb
+
+* Insertion/deletions (indels)
 
 * Rearrangements
 
 * Copy number changes
 
-* Indels
+## What are these mutations?
 
-* Base substitutions
+\begin{columns}
+\begin{column}{0.48\textwidth}
 
-    * 6 types of substitutions (C>G, C>T, C>A, G>T, G>A, T>A)
+\textit{More about base substitutions}
 
-    * 4 types of 5' base nucleotide
+\begin{itemize}
 
-    * 4 types of 3' base nucleotide
+  \item{6 types: C>G, C>T, C>A, G>T, G>A, T>A}
 
-    * Transcriptional strand
+  \item{Transversion}
+  \begin{itemize}
+    \item{purine (A/G) $\leftrightarrow$ pyrimidine (T/C)}
+  \end{itemize}
 
-## Clonal evolution in cancer
+  \item{Transition}
+  \begin{itemize}
+    \item{maintain ring structure (A $\leftrightarrow$ G or T $\leftrightarrow$ C)}
+    \item{more commonly observed}
+    \item{less likely to result in amino acid substitution}
+  \end{itemize}
+
+\end{itemize}
+
+\end{column}
+\begin{column}{0.48\textwidth}
+
+\begin{figure}
+\includegraphics{./figs/nucleotides.png}
+\end{figure}
+
+\end{column}
+\end{columns}
+
+## Biological motivation
+
+Now that we have _catalogs_ of mutations in cancer genomes, what else can we learn?
+
+* Different sources of mutations could produce distinct mutational _signatures_
+
+* Cancer genomes are then mixtures of these signatures
+
+* How do we identify these (unknown) _signatures_ from _catalogs_ of mutations?
 
 # Applying NMF to mutational processes
 
@@ -432,23 +570,215 @@ Accurately deciphered mutational signatures correspond to accurate exposure esti
 ![](./figs/Screen Shot 2018-10-03 at 8.37.37 AM.png)
 
 
-## Findings (Amanda)
+## Findings: @nikzainal2012breastcancer
 
-* ...
+__Data__
 
-* ...
+* 21 primary breast cancer samples
 
-* ...
+* Whole-genome sequencing, ~30X coverage
 
-# We've talked enough (Amanda)
+* Mutation alphabet:
+
+    * 96 base substitutions (6 types $\times$ 16 5'- $\times$ 16 3'-dinucleotides)
+    * Kataegis
+    * Double nucleotide substitutions
+    * Indels at microhomologies
+    * Indels at mono/polynucleotide repeats
+
+* Previously described 5 mutational signatures
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.53\textwidth}
+\begin{itemize}
+\item{96 base mutations}
+\item{Extracted 4 reproducible signatures, similar to 4 previously identified signatures (A, B, D, E)}
+\item{Signature C similar to Signature D $\rightarrow$ incorporated into Signature 3}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure4a.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations + 4 subclasses}
+\item{Signatures 1-4 largely unmodified}
+\item{Now able to detect Signature 5}
+\item{"kataegis is mostly independent from other four mutational signatures"}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure4b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations $\times$  +/- transcribed strand}
+\item{Recovered previous 4 signatures}
+\item{Observed C>A strand bias in Signatures 1 and 3}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure5b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{96 base mutations $\times$ 256 neighboring 5'- and 3'- dinucleotides}
+\item{Identified 3 reproducible signatures}
+\item{Signature 2: strong bias for pyrimidine-T-C-N-N}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure6c.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @nikzainal2012breastcancer
+
+__Takeaways__
+
+* Can recover previously identified signatures
+
+    * Reassuring, but slightly misleading
+
+    * Previous paper (same authors) also used NMF, but with different model
+      selection procedure
+
+* Incorporate different mutation types (i.e. kataegis)
+
+* Can recover transcriptional strand bias
+
+* Can observe sequence context dependencies
+
+## Findings: @stephens2012breastcancer
+
+__Data__
+
+* 100 primary breast cancer samples
+
+* Exome-sequencing (21,416 protein-coding genes; 1,664 microRNAs)
+
+* Mutation alphabet:
+
+    * Base substitutions
+    * Indels
+
+## Findings: @stephens2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{25-fold fewer mutations than whole-genome sequencing}
+\item{Identified 2 exome signatures, similar to Signatures 1 and 2}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure7a.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @stephens2012breastcancer
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item{Exome signature 2 shows context-specific strand bias}
+\item{Can also find in whole genome data $\rightarrow$ but only if restrict to exons}
+\item{Suggests strand bias might be exclusive to exons}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/figure7b.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## Findings: @stephens2012breastcancer
+
+__Takeaways__
+
+* More exome-sequencing data than whole genome
+
+* Fewer mutation numbers means fewer detectable signatures
+
+* Dividing genome into distinct functional regions can reveal interesting biology
+
+# Discussion
+
+## Summary
+
+"This study demonstrates that an approach based on the simplest (i.e. without additional constraints) NMF algorithm is sufficient to decipher signatures of mutational processes from catalogs of mutation from cancer genomes."
+
+## Future Directions
+
+__Biological__
+
+* Experimental procedures to isolate signature from specific exposure
+
+* Bioinformatics approaches to annotate signatures
+
+__Computational__
+
+* Incorporate additional constraints to exposure matrix $E$
+
+    * Strong sparsity constraint to describe mixture by minimum signals
+
+* Metrics to evaluate to select number of signatures $N$ to be deciphered
 
 ## Discussion
 
-* ...
+* Question 1:
 
-* ...
+* Question 2:
 
-* ...
+## Discussion
+
+* What do you all think?
 
 ## References
 

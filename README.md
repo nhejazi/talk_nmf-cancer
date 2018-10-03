@@ -1,11 +1,11 @@
-# Talk: NMF-based detection of molecular signatures in cancer
+# Talk: Detecting molecular signatures in cancer via NMF
 
 __Authors:__ Nima Hejazi, Amanda Mok, Courtney Schiffman
 
 This is a slide deck for a presentation on the use of non-negative matrix
 factorization and clustering for detecting molecular signatures in cancer, for
-the seminar _Machine Learning and Statistics Meet Biology_, organized by
-[Jennifer Listgarten](http://jennifer.listgarten.com/), at UC Berkeley, in the
+the seminar _Machine Learning and Statistics Meet Biology_, organized by Prof.
+[Jennifer Listgarten](http://jennifer.listgarten.com/), at UC Berkeley in the
 Fall 2018 term.
 
 ---
