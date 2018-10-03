@@ -218,7 +218,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * Normal cells acquire hallmark traits that enable them to become tumorigenic ^[@hanahan2011hallmarks]
 
-## Hallmarks of Cancer
+## What is cancer?
 
 ![Hallmarks of Cancer](./figs/cancer_hallmarks.jpg)
 
@@ -242,25 +242,126 @@ knitr::opts_chunk$set(cache=TRUE)
 
     * MicroRNA gene silencing
 
-## Somatic mutations
+## What causes these mutations?
+
+__DNA-damaging exposures__
+
+* Carcinogens in tobacco smoke
+
+    * Polycyclic aromatic hydrocarbons (PAHs) form DNA adducts
+    
+    * Nitrosamines induce DNA alkylation
+    
+* UV radiation
+
+    * Direct: dimerization of neighboring pyrimidines
+    
+    * Indirect: production of reactive oxygen species
+    
+* Chronic inflammation
+
+    * Reactive oxygen and nitrogen species produced by innate immune system
+    
+    * Detection of DNA damage can activate immune response
+
+## What causes these mutations?
+
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+\textbf{Error-prone DNA repair}
+\textit{Single-strand damage}
+\begin{itemize}
+  \item{Use complementary strand as template}
+  \item{Base excision repair: remove single base}
+  \item{Nucleotide excision repair: remove 12-24 bases}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+\includegraphics{./figs/NER.jpg}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## What causes these mutations?
+
+\begin{columns}
+
+\begin{column}{0.53\textwidth}
+\textbf{Error-prone DNA repair}
+\textit{Double-strand damage}
+\begin{itemize}
+  \item{Non-homologous end joining: directly join microhomologies on single-strand tails}
+  \item{Homologous recombination: use sister chromatid or homologous chromosome as template}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{figure}
+\includegraphics{./figs/NHEJ_HR.png}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+## What are these mutations?
+
+* Base substitutions
+
+* Insertion/deletions
 
 * Rearrangements
 
 * Copy number changes
 
-* Indels
+## What are these mutations?
 
-* Base substitutions
+\begin{columns}
+\begin{column}{0.48\textwidth}
 
-    * 6 types of substitutions (C>G, C>T, C>A, G>T, G>A, T>A)
+\textit{More about base substitutions}
 
-    * 4 types of 5' base nucleotide
+\begin{itemize}
 
-    * 4 types of 3' base nucleotide
+  \item{6 types: C>G, C>T, C>A, G>T, G>A, T>A}
+  
+  \item{Transversion}
+  \begin{itemize}
+    \item{purine (A/G) <-> pyrimidine (T/C)}
+  \end{itemize}
 
-    * Transcriptional strand
+  \item{Transition}
+  \begin{itemize}
+    \item{maintain ring structure (A <-> G or T <-> C)}
+    \item{more commonly observed}
+    \item{less likely to result in amino acid substitution}
+  \end{itemize}
+  
+\end{itemize}
 
-## Clonal evolution in cancer
+\end{column}
+\begin{column}{0.48\textwidth}
+
+\begin{figure}
+\includegraphics{./figs/nucleotides.png}
+\end{figure}
+
+\end{column}
+\end{columns}
+
+## Biological motivation
+
+Now that we have _catalogs_ of mutations in cancer genomes, what else can we learn?
+
+* Different sources of mutations could produce distinct mutational _signatures_
+
+* Cancer genomes are then mixtures of these signatures
+
+* How do we identify these (unknown) _signatures_ from _catalogs_ of mutations?
 
 # Applying NMF to mutational processes
 
