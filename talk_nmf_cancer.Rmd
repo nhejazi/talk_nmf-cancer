@@ -93,22 +93,55 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ![](./figs/example.jpg)
 
-# Applying NMF to a biological challenge
+# Applying NMF to mutational processes
 
-## Alexandrov et al. characterize mutational processess as a blind source separation problem
+## Alexandrov et al. characterize mutational processess as a blind source separation problem.
 
 Mutational catalogs "are the cumulative result of all the somatic mutational mechanisms ...that have been operative during the cellular lineage starting from the fertilized egg...to the cancer cell."
 
 ![](./figs/biol_challenge.jpg){height=45%}
 
-## NMF is a natural method for handling the BSS problem
+## How is the work of Alexandrov et al. related to inferring clonal evolution of tumors?
+
+Goal: learn the "evolutionary history and population frequency of the subclonal lineages of tumor cells."
+
+* From SNV frequency measurements, try to infer the phylogeny and genotype of the major subclonal lineages.
+
+![](./figs/Screen Shot 2018-10-01 at 8.18.04 PM.png){height=40%}
+
+## How is the work of Alexandrov et al. related to inferring clonal evolution of tumors?
+
+Different clonal mutations will have different signatures.
+
+![](./figs/Screen Shot 2018-10-01 at 8.19.57 PM.png){height=40%}
 
 
-![](./figs/biol_challenge.jpg){height=60%}
+## Both works want to uncover driver mutations
+
+Inferring clonal evolution of tumors
+
+![](./figs/Screen Shot 2018-10-01 at 8.46.46 PM.png){width=30%}
+
+Deciphering Signatures of mutational processes
+
+![](./figs/Screen Shot 2018-10-01 at 8.48.29 PM.png){width=30%}
+
+
+## Alexandrov et al. focus more on uncovering the cumulative mutational processes that make up a cancer genome, rather than the evolution of the tumor.
+
+![](./figs/biol_challenge.jpg){height=50%}
+
+
+
+## NMF is a natural method for handling the BSS problem.
 
 * Non-negative matrix entries.
 
 * Want to learn the parts (mutational signatures of mutational processes) that add to the whole (mutational catalog).
+
+
+![](./figs/biol_challenge.jpg){height=45%}
+
 
 ## What are the basis vectors and encodings in the context of mutational processes?
 
@@ -124,13 +157,16 @@ $E$, $N$ mutation signatures by $G$ genomes
 
 ## What are the basis vectors and encodings in the context of mutational processes?
 
-![](./figs/Screen Shot 2018-09-30 at 7.44.14 PM.png){width=80%}
+![](./figs/Screen Shot 2018-09-30 at 7.44.14 PM.png){width=55%}![](./figs/Screen Shot 2018-10-01 at 8.25.26 AM.png){width=25%}
 
-![](./figs/Screen Shot 2018-10-01 at 8.25.26 AM.png){width=30%}
+* $K=$ number of mutation types.
+
+* $N=$ number of signatures.
+
+* $G=$ number of genomes.
 
 
-
-## The parts that make up the whole in mutational processes
+## The parts that make up the whole in mutational processes.
 
 ![](./figs/part_of_whole.jpg)
 
@@ -143,7 +179,7 @@ $E$, $N$ mutation signatures by $G$ genomes
 3. Monte Carlo bootstrap resampling.
 
 
-## Method for deciphering signatures of mutational processes
+## Method for deciphering signatures of mutational processes.
 
 4. Apply the multiplicative update algorithm until convergence.
 * Repeat steps 3 and 4 $I$ times, each time storing $P$ and $E$.
@@ -162,7 +198,8 @@ $E$, $N$ mutation signatures by $G$ genomes
   * This automatically clusters the exposures.
   * Use cosine similarity for clustering.
 
-![](./figs/clusters.jpeg){width=40%}
+![](./figs/clusters.jpeg){width=40%}![](./figs/Screen Shot 2018-10-02 at 8.12.01 AM.png){width=25%}
+![](./figs/Screen Shot 2018-10-02 at 8.11.22 AM.png){width=40%}
 
 
 ## Method for deciphering signatures of mutational processes
