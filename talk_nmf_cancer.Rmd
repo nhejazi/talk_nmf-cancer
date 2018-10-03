@@ -229,11 +229,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 # Applying NMF to mutational processes
 
-<<<<<<< HEAD
-## Alexandrov et al. characterize mutational processess as a blind source separation problem.
-=======
 ## @alexandrov2013deciphering characterize mutational processess as a blind source separation problem
->>>>>>> dc44f6a11dc0e08649de1cff6e55ed1077541e0e
 
 Mutational catalogs "are the cumulative result of all the somatic mutational
 mechanisms ...that have been operative during the cellular lineage starting from
@@ -241,16 +237,15 @@ the fertilized egg...to the cancer cell."
 
 ![](./figs/biol_challenge.jpg){height=45%}
 
-## How is the work of Alexandrov et al. related to inferring clonal evolution of tumors?
+## How is the work of @alexandrov2013deciphering related to inferring clonal evolution of tumors?
 
-<<<<<<< HEAD
 Goal: learn the "evolutionary history and population frequency of the subclonal lineages of tumor cells."
 
 * From SNV frequency measurements, try to infer the phylogeny and genotype of the major subclonal lineages.
 
 ![](./figs/Screen Shot 2018-10-01 at 8.18.04 PM.png){height=40%}
 
-## How is the work of Alexandrov et al. related to inferring clonal evolution of tumors?
+## How is the work of @alexandrov2013deciphering. related to inferring clonal evolution of tumors?
 
 Different clonal mutations will have different signatures.
 
@@ -268,16 +263,13 @@ Deciphering Signatures of mutational processes
 ![](./figs/Screen Shot 2018-10-01 at 8.48.29 PM.png){width=30%}
 
 
-## Alexandrov et al. focus more on uncovering the cumulative mutational processes that make up a cancer genome, rather than the evolution of the tumor.
+## @alexandrov2013deciphering focus more on uncovering the cumulative mutational processes that make up a cancer genome, rather than the evolution of the tumor.
 
 ![](./figs/biol_challenge.jpg){height=50%}
 
 
 
 ## NMF is a natural method for handling the BSS problem.
-=======
-![](./figs/biol_challenge.jpg){height=60%}
->>>>>>> dc44f6a11dc0e08649de1cff6e55ed1077541e0e
 
 * Non-negative matrix entries.
 
@@ -319,7 +311,7 @@ $E$, $N$ mutation signatures by $G$ genomes
 
 1. Input matrix $M$ of dimension $K$ (mutation types) by $G$ (genomes).
 
-2. Remove rare mutations (< 1%).
+2. Remove rare mutations ($\leq 1\%$).
 
 3. Monte Carlo bootstrap resampling.
 
