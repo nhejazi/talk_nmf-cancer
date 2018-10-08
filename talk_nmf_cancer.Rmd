@@ -16,40 +16,55 @@ knitr::opts_chunk$set(cache=TRUE)
 ## Overview and Motivations
 
 * Cancer biology is an extremely active area of research on all fronts, from
-  molecular biology and bioinformatics to translational medicine.
+  molecular biology to clinical medicine.
 
 * Statistical learning methods have met with great success when applied to
-  complex and richly structured data, including images and text.
-
-* Unsupervised clustering (e.g., matrix factorization) may help to learn about
-  or discover fundamental common properties of various cancers.
+  complex and richly structured data (e.g., images).
 
 * We review the key mathematical details of and explore the uses of matrix
-  factorization (in particular, NMF) in cancer biology.
+  factorization (esp., NMF) in biology.
 
-## Overview of Matrix Factorization
+## Overview of Matrix Factorization/Decomposition
 
-* Matrix factorization as unsupervised learning
+* Matrix factorization/decomposition as unsupervised learning
 
 * What can we learn about objects by matrix factorization?
 
-* A general formulation of matrix factorization
+* A generalized formulation of matrix factorization
 
 * Various forms of matrix factorization: NMF, PCA, VQ
 
-* Applications of matrix factorization: images
+* Applications of matrix factorization: image learning
 
 * Biological applications of matrix factorization
 
-# Non-Negative Matrix Factorization
+# Matrix Factorization Primer
 
-## What is Matrix Factorization?
+## What is Matrix Factorization/Decomposition?
 
 * Suppose we have a _data matrix_ $V$ of dimension $n \times m$, each column of
   which is an $n$-vector of observations.
 
-* A factorization of $V$ produces two matrices $\{W, H\}$ that approximately
-  capture the information present in $V$.
+* A factorization of $V$ produces some number of matrices that may be used to
+  exactly (or approximately) reconstruct $V$.
+
+* A few common matrix decompositions include
+  * QR decomposition: $V = Q R$, where $dim(Q) = m \times m$ and $dim(R) = m
+    \times n$
+  * Spectral decomposition: $V = W D W^{-1}$, where $W$ contains eigenvectors of
+    $W$ and $D$ its eigenvalues.
+  * Singular value decomposition: $V = U \Sigma W^*$, where $\Sigma$ contains
+    the singular values of $V$.
+
+## What is Matrix Factorization/Decomposition?
+
+* For our purposes, we consider a factorization of $V$ producing two matrices
+  $\{W, H\}$ that approximately capture the information present in $V$.
+
+![](./figs/matrix_decomp1.png){height=65%}
+*Illustration by C. Fevotte*
+
+## What is Matrix Factorization/Decomposition?
 
 * From linear algebra, we have $V_{ij} \approx (W H)_{ij} = \sum_{a = 1}^r
   W_{ia} H_{aj}$.
@@ -62,7 +77,12 @@ knitr::opts_chunk$set(cache=TRUE)
   * In particular, $r$ is often chosen such that $(n + m)r \leq nm$.
   * Since we control $r$, we control the degree of data compression.
 
-## What is Matrix Factorization?
+## Explaining Data by Matrix Factorization
+
+![](./figs/matrix_decomp2.png){height=65%}
+*Illustration by C. Fevotte*
+
+## What is Matrix Factorization/Decomposition?
 
 * With the factorization $V_{ij} \approx \sum_{a = 1}^r W_{ia} H_{aj}$, the
   matrix factors $W$ and $H$ each pick up different important aspects of $V$.
@@ -73,8 +93,29 @@ knitr::opts_chunk$set(cache=TRUE)
   * and each of the $j$ columns of $H$ is termed an encoding (coefficients to be
     applied to basis images).
 
+## Linear Algebra Review
+
+* Consider the problem $V u = \lambda u$, for an $n \times n$ square matrix $V$.
+  * $u$ is an vector of dimension $n$, called an _eigenvector_ of $V$.
+  * $\lambda$ is a scalar, called an _eigenvalue_ of $V$.
+
+* The eigenvectors are simply the set of vectors that are stretched or shrunk by
+  application of $V$.
+
+![](./figs/Mona_Lisa_eigenvector_grid.png){height=50%}
+
+*from Wikipedia*
+
+## What is Matrix Factorization/Decomposition?
+
 * Various forms of matrix factorization place different types of constraints on
   the manner in which $W$ and $H$ are generated.
+
+* We will compare and contrast three forms of matrix factorization, as per the
+  work of @lee1999learning:
+  * Vector quantization (VQ)
+  * Principal components analysis (PCA)
+  * Non-negative matrix factorization (NMF)
 
 ## Vector Quantization (VQ)
 
@@ -87,12 +128,33 @@ knitr::opts_chunk$set(cache=TRUE)
 * Equivalently, each column of $V$ is approximated by a single basis (column of
   $W$).
 
-* In terms of image processing/learning, VQ constraint is responsible for the
-  decomposition learning _prototypical_ faces.
+* In terms of image processing, the VQ constraint results in decomposition-based
+  learning of _prototypical_ faces.
 
 ## VQ: Prototypical Faces
 
 ![](./figs/vq_faces.png){height=100%}
+*VQ factorization enforces a unary encoding constraint.*
+
+*Distorted Basis (of Prototypes) $\times$ Unary Encoding (coefficients)*
+
+## Principal Components Analysis (PCA)
+
+* Assumptions: real-valued and centered data $V$.
+
+* PCs are scaled eigenvectors of the covariance matrix of $V$.
+
+* Statistical interpretation: each eigenface represents the direction of largest
+  variance within the sample data.
+
+![](./figs/GaussianScatterPCA.png){height=50%}
+
+*from Wikipedia*
+
+## Principal Components Analysis (PCA)
+
+* Assumptions: real-valued and centered data $V$.
+
 
 ## Principal Components Analysis (PCA)
 
@@ -105,15 +167,15 @@ knitr::opts_chunk$set(cache=TRUE)
 * This results in a distributed encoding of each of the face images in $V$;
   basis images have been termed _eigenfaces_.
 
-* Statistical interpretation: each eigenface represents the direction of largest
-  variance within the sample data.
-
 * Intuitive interpretation: ??? (Complex cancellations make eigenfaces very
   difficult to interpret.)
 
 ## PCA: _Eigenfaces_
 
 ![](./figs/pca_faces.png){height=100%}
+*PCA factorization enforces a distributed encoding constraint.*
+
+*Basis (Eigenfaces) $\times$ Distributed Encoding (coefficients)*
 
 ## PCA in Biology: Population Genetics in Europe
 
@@ -122,7 +184,9 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ![](./figs/novembre_pca.png){height=70%}
 
-## What is NMF?
+# Non-Negative Matrix Factorization
+
+## What is Non-Negative Matrix Factorization (NMF)?
 
 * __Constraint:__ decomposition into matrix factors $W$ and $H$, wherein any
   nonzero entries in $W$ and $H$ must be _positive_.
@@ -133,12 +197,14 @@ knitr::opts_chunk$set(cache=TRUE)
 * Since basis images and encodings are all positive, each basis image may be
   thought of as picking up a _part of a face_.
 
-## What does non-negativity buy us?
+* __Downside:__ NMF is ill-posed -- i.e., non-unique solutions exist.
+
+## Enforcing Non-negativity
 
 * In practice, NMF produces sparse basis and encoding matrices.
 
 * The basis images are _non-global_ -- that is, groups of basis images pick up
-  variation in a part of a face (e.g., eyes, mouth).
+  variation in a part of a face (e.g., eyes).
 
 * The encoding are also sparse, since not all basis images are used in
   reconstituting any given face image.
@@ -149,41 +215,33 @@ knitr::opts_chunk$set(cache=TRUE)
 ## NMF: Parts of Faces
 
 ![](./figs/nmf_faces.png){height=90%}
+*NMF enforces a sparse and positive encoding constraint.*
 
-## Overview of NMF
+*Non-Global Basis (Grouped) $\times$ Sparse Encoding (coefficients)*
 
-* Generally, NMF may be viewed as a generative model (neural network) for how
-  the directly observable variables $V$ arise from hidden variables $H$.
+## NMF: Parts of Faces
 
-* Each hidden variable (in $H$) may be thought of as co-activating a subset of
-  the visible variables to reconstruct an example.
+![](./figs/nmf_gillis_faces.png){height=90%}
+*from @gillis2014and*
+
+## NMF as a Generative Model
+
+* Generally, NMF may be viewed as a generative model for how directly observable
+  variables $V$ arise from hidden variables $H$.
+
+* Each hidden variable (in $H$) may be seen as co-activating a subset of the
+  visible variables to reconstruct an example.
 
 * In particular, a large and varied group of hidden variables may be combined
   additively to generate a whole example.
 
-## Implementing NMF
-
-* @lee1999learning combine a set of update rules with an objective function
-  $$F = \sum_{i = 1}^n \sum_{\mu = 1}^m V_{i \mu} \log(WH)_{i \mu} - (WH)_{i
-  \mu},$$
-  which converges to a local maximum with iterative updates under the given
-  rules.
-
-* Update rules:
-  1. $W_{ia} \leftarrow W_{ia} \sum_{\mu} \frac{V_{i \mu}}{(WH)_{i \mu}} H_{a
-     \mu}$
-  2. $W_{ia} \leftarrow \frac{W_{ia}}{\sum_j W_{ja}}$
-  3. $H_{a \mu} \leftarrow H_{a \mu} \sum_i W_{ia} \frac{V_{i \mu}}{(WH)_{i
-     \mu}}$
-
-* Exact form of objective function is not too important -- could also simply use
-  a squared error objective function.
-
-## NMF as a neural network
+## NMF as a Generative Model
 
 ![](./figs/nmf_neuralnet.png){height=90%}
+*Simple 2-layer neural net with encodings ($h$) as hidden variables that
+activate subsets of visible variables ($W$) to reconstruct $V$.*
 
-## NMF as a neural network
+## NMF as a Generative Model
 
 * Visible variables $V$ generated by excitatory connections between hidden
   variables $H$.
@@ -195,7 +253,37 @@ knitr::opts_chunk$set(cache=TRUE)
   notions of how neurons work, suggesting that NMFs may present a simplified
   model of how the brain learns parts of objects in perception.
 
-## NMF in cancer biology
+## Implementing NMF
+
+* @lee1999learning provide a likelihood-based approach, deriving an objective
+  function $$F = \sum_{i = 1}^n \sum_{\mu = 1}^m V_{i \mu} \log(WH)_{i \mu} -
+  (WH)_{i \mu} \.$$
+
+* _Interpretation_: log-likelihood maximized when solving for $W$ and $H$ same
+  as log-likelihood in a model where $V_{ij}$ has a Poisson distribution with
+  mean $(WH)_{ij}$.
+
+* Exact form of objective function is not too important -- could also simply use
+  a squared error objective function.
+
+## Implementing NMF
+
+* @lee1999learning propose a set of update rules that, upon iteration, force
+  convergence of the objective function to a local maximum while satisfying the
+  NMF criteria.
+
+* Update rules:
+  * $W_{ia} \leftarrow W_{ia} \sum_{\mu} \frac{V_{i \mu}}{(WH)_{i \mu}} H_{a
+    \mu}$ and $W_{ia} \leftarrow \frac{W_{ia}}{\sum_j W_{ja}}$
+  * $H_{a \mu} \leftarrow H_{a \mu} \sum_i W_{ia} \frac{V_{i \mu}}{(WH)_{i
+    \mu}}$
+
+* These update rules
+  * force monotonic convergence under objective function,
+  * preserve non-negativity of the factors $W$ and $H$, and
+  * constrain columns of $W$ to sum to unity.
+
+## NMF in Biology
 
 * So, we've now established that NMF finds _parts_ of the input matrix through
   the non-negativity constraint it imposes on the matrix factors.
@@ -203,10 +291,8 @@ knitr::opts_chunk$set(cache=TRUE)
 * This has important applications for exploring cancer biology; namely, applying
   NMF could help us detect _parts of tumors_.
 
-* Interpretation is challenging: does this mean we're detecting subclonal
+* Interpretation is challenging: does this mean we're detecting sub-clonal
   populations?
-
-* There's a whole lot more to come.
 
 # A bit of biology
 
