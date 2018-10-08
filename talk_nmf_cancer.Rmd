@@ -762,6 +762,8 @@ __Biological__
 
 * Bioinformatics approaches to annotate signatures
 
+* Incorporate epigenetic features
+
 __Computational__
 
 * Incorporate additional constraints to exposure matrix $E$
@@ -770,11 +772,31 @@ __Computational__
 
 * Metrics to evaluate to select number of signatures $N$ to be deciphered
 
+## Strengths and Limitations
+
+__Strengths__
+
+* Use of NMF well-motivated by research question
+* Simple approach with no black boxes
+
+__Limitations__
+
+* Lack of interpretation of mutational signatures
+* Better methods to choose number of signatures $N$
+* Need some prior knowledge to choose mutation types to evaluate
+* Amount of additional data needed to extract more signatures
+
 ## Discussion
 
-* Question 1:
+* How to account for tissue specificity?
 
-* Question 2:
+* How to infer / account for clonal evolution?
+
+* How to incorporate prior knowledge? 
+
+    * Known mutational signatures
+    
+    * Known mutagenic exposures
 
 ## Discussion
 
