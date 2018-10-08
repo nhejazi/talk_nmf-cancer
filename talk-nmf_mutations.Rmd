@@ -155,16 +155,27 @@ knitr::opts_chunk$set(cache=TRUE)
 
 * Consider real-valued and centered data $V$, with
   * mean vector $\mu = \mathbb{E}[V]$, and
-  * covariance matrix $\Sigma = Cov[V] = \mathbb{E}[(V - \mu)(V - mu)^T]$.
+  * covariance matrix $\Sigma = Cov[V] = \mathbb{E}[(V - \mu)(V - \mu)^T]$.
 
-* The principal component transformation is the standardized linear combination
-  $$V \mapsto Z \equiv \Rho^T (V - \mu),$$
-  where $\Rho^T \Sigma \Rho = \Lambda$ by the _spectral decomposition theorem_,
+* The principal component transformation is
+  $$V \to Z \equiv \Gamma^T (V - \mu),$$
+  where $\Gamma^T \Sigma \Gamma = \Lambda$ by the _spectral decomposition
+  theorem_,
   * $\Lambda$ is the diagonal matrix of eigenvalues of $\Sigma$, and
-  * $\Rho$ is an orthogonal matrix of the eigenvectors.
+  * $\Gamma$ is an orthogonal matrix of the eigenvectors $\gamma_j: j = 1,
+    \ldots, J$.
+
+## Principal Components Analysis (PCA)
 
 * Then, the $j^{\text{th}}$ principal component of $V$ is
   $$Z_j = \gamma_j^T(V - \mu)$$
+
+* The principal components recovered from the transformation have a few nice
+  properties:
+  * $\mathbb{E}[Z] = 0_j$, where $0_j$ is a J-dimensional column vector of
+    zeros.
+  * $Cov[Z] = \Gamma = Diag(\lambda_j: j = 1, \ldots, J)$, where we have that
+    $$Var[Z_1] \geq Var[Z_2], \geq \ldots \geq Var[Z_J]$$
 
 ## Principal Components Analysis (PCA)
 
