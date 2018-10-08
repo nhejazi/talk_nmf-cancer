@@ -1,4 +1,4 @@
-# Talk: Detecting molecular signatures in cancer via NMF
+# Talk: Detecting mutational signatures via NMF
 
 __Authors:__ Nima Hejazi, Amanda Mok, Courtney Schiffman
 

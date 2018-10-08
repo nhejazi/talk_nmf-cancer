@@ -1,4 +1,4 @@
-DOC = talk_nmf_cancer
+DOC = talk-nmf_mutations
 
 .PHONY : build
 
